@@ -18,7 +18,12 @@ namespace SavageNasRaph1.Server.Controllers
         [HttpPost]
         public async void PostQuize(Quize quize)
         {
-            _quizescollection.InsertOne(quize);
+            await _quizescollection.InsertOneAsync(quize);
+        }
+        [HttpGet("{QuizeId}")]
+        public async Task<IAsyncCursor<Quize>> GetQuize(string QuizeId)
+        {
+            return await _quizescollection.FindAsync(q => q.Id == QuizeId);
         }
     }
 }
