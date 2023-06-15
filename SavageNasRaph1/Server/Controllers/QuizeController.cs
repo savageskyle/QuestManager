@@ -20,10 +20,15 @@ namespace SavageNasRaph1.Server.Controllers
         {
             await _quizescollection.InsertOneAsync(quize);
         }
-        [HttpGet("{QuizeId}")]
+        [HttpGet("{ConnectionId}")]
         public async Task<IAsyncCursor<Quize>> GetQuize(string QuizeId)
         {
-            return await _quizescollection.FindAsync(q => q.Id == QuizeId);
+            return await _quizescollection.FindAsync(q => q.ConnectionId == QuizeId);
+        }
+        [HttpGet("ResultId")]
+        public async Task<IAsyncCursor<Quize>> GetResults(string ResultId)
+        {
+            return await _quizescollection.FindAsync(q => q.ResultId == ResultId);
         }
     }
 }
