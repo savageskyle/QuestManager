@@ -15,6 +15,10 @@ namespace SavageNasRaph1.Server.Controllers
             var database = client.GetDatabase("ReviewsDb");
             _quizescollection = Settings.QuizesCollection;
         }
-
+        [HttpPost]
+        public async void PostQuize(Quize quize)
+        {
+            _quizescollection.InsertOne(quize);
+        }
     }
 }
