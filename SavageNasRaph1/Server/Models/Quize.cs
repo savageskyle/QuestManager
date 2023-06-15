@@ -3,6 +3,7 @@
     public class Quize
     {
         public List<Question> Questions { get; set; }
+        public List<KeyValuePair<string,int>> Marks { get; set; }
     }
     public class Question
     {
