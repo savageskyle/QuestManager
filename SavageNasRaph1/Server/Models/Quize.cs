@@ -2,6 +2,7 @@
 {
     public class Quize
     {
+        public string Id { get; set; }
         public List<Question> Questions { get; set; }
         public List<KeyValuePair<string,int>> Marks { get; set; }
     }
