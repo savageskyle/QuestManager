@@ -10,10 +10,9 @@ namespace SavageNasRaph1.Server.Controllers
     [Route("api/controller")]
     public class QuizeController : Controller
     {
-        private readonly IMongoCollection<Quize> _quizescollection= Settings.QuizesCollection;
+        private readonly IMongoCollection<Quize> _quizescollection;
         public QuizeController(IMongoClient client)
         {
-            var database = client.GetDatabase("ReviewsDb");
             _quizescollection = Settings.QuizesCollection;
         }
         [HttpPost]
@@ -22,14 +21,16 @@ namespace SavageNasRaph1.Server.Controllers
             await _quizescollection.InsertOneAsync(quize);
         }
         [HttpGet("{ConnectionId}")]
-        public async Task<IAsyncCursor<Quize>> GetQuize(string QuizeId)
+        public async Task<List<Question>> GetQuize(string QuizeId)
         {
-            return await _quizescollection.FindAsync(q => q.ConnectionId == QuizeId);
+            var quize= await _quizescollection.FindAsync(q => q.ConnectionId == QuizeId);
+            return quize.First().Questions;
         }
         [HttpGet("ResultId")]
-        public async Task<IAsyncCursor<Quize>> GetResults(string ResultId)
+        public async Task<List<KeyValuePair<string,int>>> GetResults(string ResultId)
         {
-            return await _quizescollection.FindAsync(q => q.ResultId == ResultId);
+            var quize = await _quizescollection.FindAsync(q => q.ConnectionId == ResultId);
+            return quize.First().Marks;
         }
     }
 }
