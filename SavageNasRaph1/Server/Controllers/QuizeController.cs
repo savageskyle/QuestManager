@@ -6,6 +6,7 @@ using SavageNasRaph1.Server.Models;
 
 namespace SavageNasRaph1.Server.Controllers
 {
+    [ApiController]
     [Route("api/controller")]
     public class QuizeController : Controller
     {
